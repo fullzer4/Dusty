@@ -1,0 +1,36 @@
+[package]
+name = "dusty"
+version = "0.1.0"
+edition = "2021"
+authors = ["fullzer4"]
+description = "A modern notification daemon inspired by Dunst"
+license = "MIT"
+repository = "https://github.com/fullzer4/Dusty"
+readme = "README.md"
+keywords = ["notification", "daemon", "linux", "dbus", "desktop"]
+categories = ["gui", "os::unix-apis"]
+exclude = [".github", ".gitignore", ".vscode"]
+
+[dependencies]
+chrono = "0.4.41"
+env_logger = "0.11.8"
+log = "0.4.27"
+tokio = { version = "1.44.2", features = ["full"] }
+zbus = { version = "5.6.0" }
+
+[profile.release.build-override]
+opt-level = 3
+codegen-units = 1
+
+[profile.dev]
+opt-level = 1
+
+[profile.release]
+opt-level = 3
+strip = true
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.dev.package."*"]
+opt-level = 3

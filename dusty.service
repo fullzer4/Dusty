@@ -1,0 +1,21 @@
+[Unit]
+Description=Dusty Notification Daemon
+Documentation=https://github.com/fullzer4/Dusty
+PartOf=graphical-session.target
+After=graphical-session.target
+ConditionEnvironment=DISPLAY
+
+[Service]
+ExecStart=/usr/bin/dusty
+Restart=on-failure
+RestartSec=3
+Environment=RUST_BACKTRACE=1
+
+ProtectSystem=full
+ProtectHome=read-only
+PrivateTmp=true
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=graphical-session.target
